@@ -7,7 +7,7 @@ _start:
 	mov edx, [d] ; load value d into edx
 	
 	imul eax, ebx ; multiply (a x b) and store result in eax
-	imul ecx, edx ; multiply (c x d) and store result in eco
+	imul ecx, edx ; multiply (c x d) and store result in ecx
 	add eax, ecx  ; add the two parentheses and store result in eax
 	
 	mov [result], eax ; store result in result
