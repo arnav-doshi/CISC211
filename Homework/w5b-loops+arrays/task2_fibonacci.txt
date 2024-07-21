@@ -1,0 +1,24 @@
+section .text
+    global _start
+
+_start:
+    mov ecx, 10    ; counter for the 10th Fibonacci number
+    mov eax, 0     ; first fib number
+    mov ebx, 1     ; second fib number
+
+calc_fib:
+    mov edx, eax   ; store eax in edx
+    add eax, ebx   ; eax = eax + ebx
+    mov ebx, edx   ; ebx = old eax
+    loop calc_fib  ; repeat until ecx is 0
+
+    ; eax contains the 10th Fibonacci number
+    mov [tenthfib], eax  ; store result in tenthfib
+
+    mov eax, 1           ; exit
+    int 0x80          
+
+section .data
+    tenthfib dd 0  ; to store the 10th Fibonacci number
+
+; tenthfib ends at 55

@@ -1,0 +1,35 @@
+section .text
+        global _start
+
+_start:
+        mov eax, 4           ; array length
+        mov ebx, 0           ; ebx = 0, will hold the max
+        mov ecx, array       ; move array address to ecx
+
+        mov edx, [ecx]       ; move the first element of the array to edx
+        mov ebx, edx         ; initialize ebx with the first element
+        add ecx, 4           ; move to the next element
+        dec eax              ; decrement the counter (already have first element)
+
+top:
+        mov edx, [ecx]       ; load current element into edx
+        cmp edx, ebx         ; compare current element with the current max val in ebx
+        jle next      ; if the current element is <= to the max value jump to next
+        mov ebx, edx         ; else update ebx with the current element if larger
+
+next:
+        add ecx, 4           ; next element in the array (4 bytes away)
+        dec eax              ; decrement eax, (array length)
+        jnz top              ; if eax is not zero, restart
+
+        ; ebx contains the largest element in the array
+        mov [max], ebx       ; store the maximum value in the max variable
+
+        mov eax, 1           ; exit
+        int 0x80             
+
+section .data
+        array dd 5, 20, 15, 2  ; define array with four elements
+
+section .bss
+        max resd 1             

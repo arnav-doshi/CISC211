@@ -1,0 +1,3 @@
+What were your challenges in performing the lab (from design to the implementation phases)?
+
+One of the biggest challenges in performing the lab was converting my knowledge from other programming languages to assembly. For the fibonacci task, in other language, I would make a recursive function with memoization, but in assembly, it's not as straightforward. Task #3 also had the challenge of keeping track of what number you're at in the array.

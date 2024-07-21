@@ -1,0 +1,19 @@
+section .text
+        global _start
+
+_start:
+        mov ebx, 10  ; ebx is a counter register
+        mov eax, 0   ; initialize eax to 0
+
+label:
+        inc eax      ; increment eax
+        dec ebx      ; decrement ebx
+        jnz label    ; jump to label if ebx is not zero
+
+        mov eax, 1   ; system call number for exit
+        int 0x80     ; interrupt to call the kernel
+
+
+
+; MY FINDINGS:
+; This way of counting is interesting. While ebx, the counting register is continually decremented by 1, eax is incremented by 1. This process continues until eventually eax counts to 10, while ebx reduces to 0. This is an interesting way of writing a counter in assembly.
