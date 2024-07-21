@@ -1,0 +1,55 @@
+section .text
+    global _start
+
+_start:
+    ; PART 1 - Create a sequence of even numbers up to 20
+    mov eax, 0      ; initialize eax to 0
+
+label:
+    add eax, 2      ; add by 2 to get the next even number
+    cmp eax, 20     ; compare eax with 20
+    jl label       ; jump to label if eax less than 20
+
+
+
+    ; PART 2 - Find the largest number among five integers
+    mov eax, [num1]
+    mov ebx, [num2]
+    cmp eax, ebx    ; compare eax and ebx
+    jg l1           ; jump if eax greater than ebx
+    mov eax, ebx    ; move ebx to eax if ebx greater than eax
+    
+l1:
+    mov ebx, [num3] ; load third number into eax
+    cmp eax, ebx    ; compare eax and ebx
+    jg l2           ; jump to l2 if eax greater than ebx
+    mov eax, ebx    ; move to ebx if otherwise
+l2:
+    mov ebx, [num4]
+    cmp eax, ebx
+    jg l3
+    mov eax, ebx
+l3:
+    mov ebx, [num5]
+    cmp eax, ebx
+    jg l4
+    mov eax, ebx
+l4:
+    mov [largest], eax
+    
+    
+    mov eax, 1      ; exit
+    int 0x80        
+    
+section .data ; initializing all the 5 integers 
+    num1 dd 10
+    num2 dd 20
+    num3 dd 30
+    num4 dd 5
+    num5 dd 1
+
+section .bss ; reserving space for largest variable
+    largest resd 1
+    
+    
+; Largest should be 30 at the end of this program

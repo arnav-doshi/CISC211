@@ -1,0 +1,3 @@
+What were your challenges in performing the lab (from design to the implementation phases)? (1 mark)
+
+The first part of the lab was relatively straightforward, with generating the even numbers up to 20. A challenge I had in the second part of the lab was keeping up with the many variables. Up till now, we've only dealt with up to 4 variables, but dealing with 5, while comparing them, gave me a little bit more to think about.
