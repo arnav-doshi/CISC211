@@ -1,0 +1,35 @@
+_start:
+    mov eax, 4 ; 4! is 24 
+    call recursive
+    mov [result], eax
+
+    mov eax, 1 ; exit the program
+    int 0x80
+
+end_recursion:
+    mov eax, 1
+    ret
+
+recursive:
+    ; Base case for recursion. Jump if eax is 0
+    cmp eax, 0
+    jz end_recursion
+
+; Recursive case
+    push eax
+    dec eax
+    call recursive
+    
+    pop ebx
+    imul eax, ebx ; multiply and find factorial
+; Return and check condition again
+    ret
+
+    
+section .data
+
+section .bss
+    result resd 1 ; reserve space for result
+
+section .text
+    global _start
