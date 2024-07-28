@@ -1,0 +1,40 @@
+_start:
+    mov byte [output], 0x41   ; store 'A' in output
+
+loopy:
+    call writeCurrent         ; call writecurr
+    call writeNewline         ; call writeNewline
+    mov al, [output]          
+    inc al                    ; increment the character
+    mov [output], al          ; store the new character
+    cmp al, 0x5B              
+    jne loopy                 ; if not equal repeat the loop
+
+    mov eax, 1                ; exit
+    int 0x80                  
+
+writeCurrent:
+    mov eax, 4                ; sys_write
+    mov ebx, 1                
+    mov ecx, output           ; address the output character
+    mov edx, outlength        
+    int 0x80                  
+    ret                       ; return from writeCurrent
+
+writeNewline:
+    mov eax, 4                ; sys_write
+    mov ebx, 1                
+    mov ecx, newline_char     ; address the output character
+    mov edx, 1                
+    int 0x80                  
+    ret                       ; return from writeNewline
+
+section .data
+    newline_char: db 0x0A     ; newline character
+    outlength: db 0x01        
+
+section .bss
+    output: resb 1            ; reserve space for output
+
+section .text
+    global _start             

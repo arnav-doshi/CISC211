@@ -1,0 +1,4 @@
+What were your challenges in performing the lab (from design to the implementation phases)? (1 mark)
+
+
+One of the challenges when performing this lab was getting used to ASCII characters and procedures. Working with ASCII took some work to think about, and using procedures made the program different from our previous homeworks.

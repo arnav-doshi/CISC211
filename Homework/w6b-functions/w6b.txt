@@ -1,0 +1,47 @@
+_start:
+    ; assign num
+    mov eax, 11
+
+    ; call function to check even or odd
+    call check_even_odd
+
+    mov eax, 1  ; sys exit
+    int 0x80  
+
+check_even_odd:
+    ; check number in eax is even or odd using modulo
+    mov ebx, eax  ; move num to eax
+    mov edx, 0  
+    mov ecx, 2  ; divisor for modulo operation
+
+    div ecx  ; perform division
+
+    cmp edx, 0  ; compare the remainder with 0
+    jz even
+
+    ; if odd, print "odd"
+    mov ecx, odd_msg
+    mov edx, odd_len
+    jmp print
+
+even:
+    ; if even, print "even"
+    mov ecx, even_msg
+    mov edx, even_len
+
+print:
+    ; print the message
+    mov eax, 4  ; sys write
+    mov ebx, 1  
+    int 0x80  ; make system call
+    ret
+
+
+section .data
+    even_msg db 'even', 10, 0  ; 10 is newline character
+    even_len equ $ - even_msg
+    odd_msg db 'odd', 10, 0
+    odd_len equ $ - odd_msg
+
+section .text
+    global _start
