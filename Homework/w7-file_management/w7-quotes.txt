@@ -1,0 +1,52 @@
+SECTION .data
+    filename db 'quotes.txt', 0
+    contents1 db 'To be, or not to be, that is the question.', 10 ; newline char
+              db 'A fool thinks himself to be wise, but a wise man knows himself to be a fool.', 10, 0h
+    contents2 db 'Better three hours too soon than a minute too late.', 10
+              db 'No legacy is so rich as honesty.', 10, 0h
+
+SECTION .text
+    global _start
+
+_start:
+
+    ; create and open file
+    mov ecx, 0711o          ; set all permissions to read, write execute (octal format)
+    mov ebx, filename       ; filename we will create
+    mov eax, 8              ; sys_creat (code 8)
+    int 0x80
+    mov [fd_out], eax
+
+    ; file write operation
+    mov eax, 4              ; file handling system call
+    mov ebx, [fd_out]       ; file descriptor
+    mov ecx, contents1
+    mov edx, 120            ; num bytes 
+    int 0x80
+
+    ; Use sys_lseek to move to the end of the file
+    mov eax, 19             ; sys_lseek number 19
+    mov ebx, [fd_out]       ; putting file descriptor in ebx
+    mov ecx, 0              ; offset in ecx
+    mov edx, 2              ; reference position (end of file)
+    int 0x80
+
+    ; file write operation
+    mov eax, 4              ; file handling syscall
+    mov ebx, [fd_out]       
+    mov ecx, contents2
+    mov edx, 85             ; number of bytes 
+    int 0x80
+
+    ; file close operation
+    mov eax, 6              ; file handling system call
+    mov ebx, [fd_out]
+    int 0x80
+
+    ; exit program
+    mov eax, 1              
+    int 0x80
+    
+
+SECTION .bss
+    fd_out resb 1

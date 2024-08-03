@@ -1,0 +1,3 @@
+What were your challenges in performing the lab (from design to the implementation phases)? (1 mark)
+
+One of the challenges in performing this lab was dealing with files in a different way compared to other programming languages. Compared to other programming languages, asm uses system calls and kernel codes, which were a new experience. 
