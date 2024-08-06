@@ -1,0 +1,44 @@
+section .text
+    global _start
+
+_start:
+    call addnums        ; call function of our choice
+
+    ; exit program
+    mov eax, 1        
+    int 0x80           
+
+addnums:
+    ; save pointer and set up stack
+    push ebp
+    mov ebp, esp
+
+    ; load vals
+    mov eax, [x]       ; x into eax
+    mov ebx, [y]       ; y into ebx
+    mov ecx, [z]       ; z into ecx
+
+    ; add (eax = eax + ebx + ecx)
+    add eax, ebx       
+    add eax, ecx       
+
+    ; save result into result variable
+    mov [result], eax
+
+    ; restores ebp
+    mov esp, ebp
+    pop ebp
+
+    ; return
+    ret
+
+section .data
+    x dd 20             ; define x with an int
+    y dd 10             ; define y with an int
+    z dd 15             ; define z with an int
+
+section .bss
+    result resd 1      ; reserve space for result
+    
+    
+; result is 45 at the end of the program
